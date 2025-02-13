@@ -1,6 +1,4 @@
-import random
-import pygame
-
+import random, pygame
 global SCREEN, CLOCK, blockSize, ev
 
 class Button():
@@ -94,13 +92,15 @@ BLACK = (0, 0, 0)
 WHITE = (200, 200, 200)
 
 MAP_X, MAP_Y = WINDOW_WIDTH // blockSize, WINDOW_HEIGHT // blockSize
-MAP = [[Cell(random.choice([True, False]) if random.randint(0, 5) == 1 else False, [i, j]) for j in range(MAP_Y)] for i in range(MAP_X)]
+MAP = [[Cell(random.choice([True, False]) if random.randint(0, 2) == 1 else False, [i, j]) for j in range(MAP_Y)] for i in range(MAP_X)]
 
 pygame.init()
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.RESIZABLE)
 CLOCK = pygame.time.Clock()
 paused = False
 btn = Button((255, 255, 0), 0, 0, 200, 50, text="PAUSE")
+
+pygame.display.set_caption("Game of Life - Pygame")
 
 # Bucle principal
 while True:
