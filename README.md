@@ -2,16 +2,6 @@
 
 A simple implementation of Conway's Game of Life in Python using Pygame for visualization.
 
-## Features
-
-Live Simulation: Watch the cellular automaton evolve in real time. 
-
-Pause & Resume: Control the simulation with a button.
-
-Interactive Editing: Click on cells to toggle their state (alive/dead).
-
-Resizable Window: The grid adapts dynamically when resizing the window, keeping the previous state.
-
 ## Installation
 
 ## Clone the repository  
@@ -33,6 +23,8 @@ python game_of_life.py
 Left-click on a cell to toggle its state.
 Click the "PAUSE" button to pause or resume the simulation.
 Resize the window to expand or contract the grid without losing its state.
+
+In the code, you can modify the tick parameter to alter the generations per second. Right now is set to 15 which i think is good enough to see the evolution of the cells but not be caotic.
 
 ## About Conway’s Game of Life
 
