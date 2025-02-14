@@ -4,16 +4,16 @@ A simple implementation of Conway's Game of Life in Python using Pygame for visu
 
 ## Installation
 
-## Clone the repository  
+### Clone the repository  
 ```bash
 git clone https://github.com/Karlingas/GameOfLife_Pygame.git
 cd GameOfLife_Pygame
 ```
-Install dependencies
+### Install dependencies
 ```bash
 pip install pygame
 ```
-Run the simulation
+### Run the simulation
 ```bash
 python game_of_life.py
 ```
@@ -30,12 +30,15 @@ In the code, you can modify the tick parameter to alter the generations per seco
 
 The Game of Life is a zero-player game where cells evolve based on 4 simple rules:
 
--Any live cell with fewer than 2 or more than 3 neighbors dies, as of starvation or overpopulation.
+-Any live cell with fewer than 2 neighbors dies as of starvation
+
+-Any live cell with more than 3 neighbors dies as of overpopulation.
 
 -Any live cell with 2 or 3 neighbors will keep living.
 
 -Any dead cell with exactly 3 live neighbors becomes alive.
 
+A neighbor is defined as an adjacent cell, so a cell can have a maximun of 8 neighbors.
 
 ## Screenshots
 
