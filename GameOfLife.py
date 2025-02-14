@@ -64,35 +64,35 @@ def fillGrid():
     SCREEN.fill(BLACK)
     for i in range(MAP_X):
         for j in range(MAP_Y):
-            rect = pygame.Rect(i * blockSize, j * blockSize, blockSize, blockSize)
-            pygame.draw.rect(SCREEN, WHITE if MAP[i][j].state else BLACK, rect)
+            rect = pygame.Rect(i * BLOCKSIZE, j * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE)
+            pygame.draw.rect(SCREEN, WHITE if map[i][j].state else BLACK, rect)
 
 def modifyMap(pos):
-    x, y = pos[0] // blockSize, pos[1] // blockSize
+    x, y = pos[0] // BLOCKSIZE, pos[1] // BLOCKSIZE
     if x < MAP_X and y < MAP_Y:
-        MAP[x][y].state = not MAP[x][y].state
+        map[x][y].state = not map[x][y].state
 
 def resizeGrid(new_width, new_height):
-    global MAP_X, MAP_Y, MAP, blockSize
+    global MAP_X, MAP_Y, map, BLOCKSIZE
 
-    MAP_X, MAP_Y = new_width // blockSize, new_height // blockSize
+    MAP_X, MAP_Y = new_width // BLOCKSIZE, new_height // BLOCKSIZE
     new_map = [[Cell(False, [i, j]) for j in range(MAP_Y)] for i in range(MAP_X)]
 
-    for i in range(min(MAP_X, len(MAP))):
-        for j in range(min(MAP_Y, len(MAP[i]))):
-            new_map[i][j].state = MAP[i][j].state
+    for i in range(min(MAP_X, len(map))):
+        for j in range(min(MAP_Y, len(map[i]))):
+            new_map[i][j].state = map[i][j].state
 
     return new_map
 
 # Configuración inicial
 WINDOW_WIDTH, WINDOW_HEIGHT = 750, 750
-blockSize = 10
+BLOCKSIZE = 10
 
 BLACK = (0, 0, 0)
 WHITE = (200, 200, 200)
 
-MAP_X, MAP_Y = WINDOW_WIDTH // blockSize, WINDOW_HEIGHT // blockSize
-MAP = [[Cell(random.choice([True, False]) if random.randint(0, 2) == 1 else False, [i, j]) for j in range(MAP_Y)] for i in range(MAP_X)]
+MAP_X, MAP_Y = WINDOW_WIDTH // BLOCKSIZE, WINDOW_HEIGHT // BLOCKSIZE
+map = [[Cell(random.choice([True, False]) if random.randint(0, 2) == 1 else False, [i, j]) for j in range(MAP_Y)] for i in range(MAP_X)]
 
 pygame.init()
 SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.RESIZABLE)
@@ -116,14 +116,14 @@ while True:
         elif event.type == pygame.VIDEORESIZE:
             WINDOW_WIDTH, WINDOW_HEIGHT = event.w, event.h
             SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.RESIZABLE)
-            MAP = resizeGrid(WINDOW_WIDTH, WINDOW_HEIGHT)
+            map = resizeGrid(WINDOW_WIDTH, WINDOW_HEIGHT)
 
     if btn.isOver(pygame.mouse.get_pos()):
         paused = not paused
 
     if not paused:
-        NEXT_GEN = [[MAP[i][j].compruebaReglas(MAP) for j in range(MAP_Y)] for i in range(MAP_X)]
-        MAP = [[Cell(NEXT_GEN[i][j].state, [i, j]) for j in range(MAP_Y)] for i in range(MAP_X)]
+        next_gen = [[map[i][j].compruebaReglas(map) for j in range(MAP_Y)] for i in range(MAP_X)]
+        map = [[Cell(next_gen[i][j].state, [i, j]) for j in range(MAP_Y)] for i in range(MAP_X)] 
 
     fillGrid()
     btn.draw(SCREEN)
